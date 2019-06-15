@@ -10,3 +10,9 @@ export interface Choice {
   description: string
   name: string
 }
+
+export interface Format {
+  type: string
+  subject: string
+  body: string | null
+}

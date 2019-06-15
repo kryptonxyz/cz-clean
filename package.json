@@ -13,6 +13,7 @@
     "commit": "git-cz",
     "lint": "eslint lib/**",
     "fix": "eslint --fix lib/**",
+    "test": "yarn build && ava",
     "build": "rimraf dist && tsc",
     "prepublishOnly": "yarn build"
   },
@@ -25,6 +26,7 @@
     "@types/wrap-ansi": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^1.10.2",
     "@typescript-eslint/parser": "^1.10.2",
+    "ava": "^2.1.0",
     "commitizen": "^3.1.1",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^5.0.0",
@@ -38,7 +40,17 @@
     "lint-staged": "^8.2.1",
     "prettier": "^1.18.2",
     "rimraf": "^2.6.3",
+    "ts-node": "^8.3.0",
     "typescript": "^3.5.2"
+  },
+  "ava": {
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   },
   "husky": {
     "hooks": {

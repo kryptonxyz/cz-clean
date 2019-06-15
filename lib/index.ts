@@ -1,10 +1,10 @@
 'use strict'
 
 import pad from 'pad'
-import wrap from 'wrap-ansi'
 
 import { Commit } from './types' // eslint-disable-line no-unused-vars
 import choices from './choices'
+import format from './format'
 
 const filter = (array: [string, string | null]) => array.filter(x => x)
 
@@ -38,10 +38,9 @@ module.exports = {
       }
     ])
       .then(({ type, subject, body }: Commit) => {
-        const short = `${type}: ${subject}`
-        const long = body ? wrap(body, 100) : null
+        const { short, long } = format({ type, subject, body: body || null })
 
-        commit(filter([short, long || null]).join('\n\n'))
+        commit(filter([short, long]).join('\n\n'))
       })
       .catch((error: Error) => console.log('\n\n💥 ', error.message))
   }
