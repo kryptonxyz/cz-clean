@@ -1,12 +1,21 @@
-'use strict'
+'use strict';
 
-interface Commit {
-  type: string
-  subject: string
-  body?: string
+import pad from 'pad'
+import wrap from 'wrap-ansi'
+
+import { Commit } from './types'
+import choices from './choices'
+
+const filter = (array: [string, string | null]) => array.filter(x => x)
+
+const getChoices = () => {
+  const maxNameLength = Math.max(...(choices.map(choice => choice.name.length)));
+
+  return choices.map(choice => ({
+    name: `${pad(choice.name, maxNameLength)}  ${choice.emoji}  ${choice.description}`,
+    value: choice.name
+  }))
 }
-
-const filter = (array: any) => array.filter((x: any) => x)
 
 module.exports = {
   prompter: (cz: any, commit: any) => {
@@ -14,8 +23,8 @@ module.exports = {
       {
         type: 'list',
         name: 'type',
-        message: "Select the type of change that you're committing:",
-        choices: ['feat', 'fix', 'perf', 'chore']
+        message: `Select the type of change that you're committing:`,
+        choices: getChoices()
       },
       {
         type: 'input',
@@ -30,10 +39,10 @@ module.exports = {
     ])
       .then(({ type, subject, body }: Commit) => {
         const short = `${type}: ${subject}`
-        const long = body ? body : null
+        const long = body ? wrap(body, 100) : null
 
-        return commit(filter([short, long ? long : null]).join('\n\n'))
+        commit(filter([short, long ? long : null]).join('\n\n'))
       })
-      .catch((error: any) => console.log('\n\n💥', error.message))
+      .catch((error: Error) => console.log('\n\n💥', error.message))
   }
 }

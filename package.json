@@ -17,6 +17,7 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
+    "@types/wrap-ansi": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^1.10.2",
     "@typescript-eslint/parser": "^1.10.2",
     "commitizen": "^3.1.1",
@@ -60,5 +61,9 @@
     "commitizen": {
       "path": "./dist/index.js"
     }
+  },
+  "dependencies": {
+    "pad": "^3.2.0",
+    "wrap-ansi": "^6.0.0"
   }
 }
