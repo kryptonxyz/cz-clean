@@ -1,9 +1,15 @@
 'use strict'
 
-const filter = array => array.filter(x => x)
+interface Commit {
+  type: string
+  subject: string
+  body?: string
+}
+
+const filter = (array: any) => array.filter((x: any) => x)
 
 module.exports = {
-  prompter: (cz, commit) => {
+  prompter: (cz: any, commit: any) => {
     cz.prompt([
       {
         type: 'list',
@@ -22,12 +28,12 @@ module.exports = {
         message: 'Provide a longer description of the change: (press enter to skip)\n'
       }
     ])
-      .then(({ type, subject, body }) => {
+      .then(({ type, subject, body }: Commit) => {
         const short = `${type}: ${subject}`
         const long = body ? body : null
 
-        commit(filter([short, long ? long : null]).join('\n\n'))
+        return commit(filter([short, long ? long : null]).join('\n\n'))
       })
-      .catch(error => console.log('\n\n💥', error.message))
+      .catch((error: any) => console.log('\n\n💥', error.message))
   }
 }

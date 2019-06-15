@@ -4,20 +4,46 @@
   "repository": "git@github.com:hackerjobs/cz-clean.git",
   "author": "Enrique Benitez <hello@bntz.io>",
   "license": "MIT",
+  "main": "dist",
+  "types": "dist",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "commit": "git-cz",
     "lint": "xo",
-    "fix": "xo --fix"
+    "fix": "xo --fix",
+    "build": "rimraf dist && tsc",
+    "prepublishOnly": "yarn build"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
+    "@typescript-eslint/parser": "^1.10.2",
     "commitizen": "^3.1.1",
+    "eslint-config-xo-typescript": "^0.14.0",
     "husky": "^2.4.1",
     "lint-staged": "^8.2.1",
     "prettier": "^1.18.2",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.5.2",
     "xo": "^0.24.0"
   },
   "xo": {
-    "prettier": true
+    "prettier": true,
+    "extends": "xo-typescript",
+    "extensions": [
+      "ts"
+    ],
+    "rules": {
+      "@typescript-eslint/semi": false,
+      "@typescript-eslint/member-delimiter-style": "none",
+      "@typescript-eslint/explicit-function-return-type": false,
+      "indent": "off",
+      "@typescript-eslint/indent": [
+        "error",
+        2
+      ]
+    }
   },
   "husky": {
     "hooks": {
@@ -32,7 +58,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "./index.js"
+      "path": "./dist/index.js"
     }
   }
 }
