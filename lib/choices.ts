@@ -80,6 +80,12 @@ const choices: Choice[] = [
     name: 'config'
   },
   {
+    emoji: '👌',
+    code: ':ok_hand:',
+    description: 'Add or fix types.',
+    name: 'types'
+  },
+  {
     emoji: '👷',
     code: ':construction_worker:',
     description: 'Adding CI build system.',
