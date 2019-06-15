@@ -1,4 +1,4 @@
-import { Choice } from './types'
+import { Choice } from './types' // eslint-disable-line no-unused-vars
 
 const choices: Choice[] = [
   {

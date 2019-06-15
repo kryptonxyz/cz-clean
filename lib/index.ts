@@ -1,15 +1,15 @@
-'use strict';
+'use strict'
 
 import pad from 'pad'
 import wrap from 'wrap-ansi'
 
-import { Commit } from './types'
+import { Commit } from './types' // eslint-disable-line no-unused-vars
 import choices from './choices'
 
 const filter = (array: [string, string | null]) => array.filter(x => x)
 
 const getChoices = () => {
-  const maxNameLength = Math.max(...(choices.map(choice => choice.name.length)));
+  const maxNameLength = Math.max(...choices.map(choice => choice.name.length))
 
   return choices.map(choice => ({
     name: `${pad(choice.name, maxNameLength)}  ${choice.emoji}  ${choice.description}`,
@@ -41,8 +41,8 @@ module.exports = {
         const short = `${type}: ${subject}`
         const long = body ? wrap(body, 100) : null
 
-        commit(filter([short, long ? long : null]).join('\n\n'))
+        commit(filter([short, long || null]).join('\n\n'))
       })
-      .catch((error: Error) => console.log('\n\n💥', error.message))
+      .catch((error: Error) => console.log('\n\n💥 ', error.message))
   }
 }
