@@ -5,10 +5,30 @@
   "author": "Enrique Benitez <hello@bntz.io>",
   "license": "MIT",
   "scripts": {
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "lint": "xo",
+    "fix": "xo --fix"
   },
   "devDependencies": {
-    "commitizen": "^3.1.1"
+    "commitizen": "^3.1.1",
+    "husky": "^2.4.1",
+    "lint-staged": "^8.2.1",
+    "prettier": "^1.18.2",
+    "xo": "^0.24.0"
+  },
+  "xo": {
+    "prettier": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn fix",
+      "git add"
+    ]
   },
   "config": {
     "commitizen": {
