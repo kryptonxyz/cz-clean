@@ -2,6 +2,8 @@
 
 <p align="center">A commitizen adapter based on clean commits ✨</p>
 
+[![Build Status](https://travis-ci.org/hackerjobs/cz-clean.svg?branch=master)](https://travis-ci.org/hackerjobs/cz-clean)
+
 ### Why?
 
 Clean commit history is super useful when it comes to searching and navigating through `git log`, `git blame` or through the GitHub commit history.
